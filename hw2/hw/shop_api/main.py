@@ -1,8 +1,10 @@
 from typing import Any, Dict, Optional
 from fastapi import FastAPI, HTTPException, Query, Body, Response, status
 from pydantic import BaseModel, ConfigDict
+from prometheus_fastapi_instrumentator import Instrumentator
 
 app = FastAPI(title="Shop API")
+Instrumentator().instrument(app).expose(app)
 
 items: Dict[int, Dict[str, Any]] = {}
 carts: Dict[int, Dict[str, Any]] = {}
